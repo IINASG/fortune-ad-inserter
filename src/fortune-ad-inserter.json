@@ -1,0 +1,8 @@
+{
+  "new_version" : "1.0.3",
+  "download_url" : "https://your-domain.com/path-to-latest-plugin.zip",
+  "slug" : "fortune-ad-inserter",
+  "requires" : "5.0",
+  "tested" : "6.4",
+  "last_updated" : "2024-11-05"
+}
