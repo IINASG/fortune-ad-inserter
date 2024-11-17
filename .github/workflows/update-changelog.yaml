@@ -27,6 +27,21 @@ jobs:
           github_token: ${{ secrets.ACCESSTOKEN }}
           tag_prefix: ""
           dry_run: true
+
+      - name: Update Changelog
+        uses: stefanzweifel/changelog-updater-action@v1
+        with:
+          latest-version: ${{ steps.tag_version.outputs.new_tag }}
+          release-notes: ${{ steps.tag_version.outputs.changelog }}
+          compare-url-target-revision: ${{ steps.changelog-updater.outputs.release_compare_url }}
+
+      - name: Commit updated CHANGELOG
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          branch: ${{ github.event.release.target_commitish }}
+          commit_message: Update CHANGELOG
+          file_pattern: CHANGELOG.md
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -45,17 +60,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACCESSTOKEN }}
           GIT_EMAIL: github-actions[bot]@users.noreply.github.com
           GIT_NAME: github-actions[bot]
-
-      - name: Update Changelog
-        uses: stefanzweifel/changelog-updater-action@v1
-        with:
-          latest-version: ${{ steps.tag_version.outputs.new_tag }}
-          release-notes: ${{ steps.tag_version.outputs.changelog }}
-          compare-url-target-revision: ${{ steps.changelog-updater.outputs.release_compare_url }}
-
-      - name: Commit updated CHANGELOG
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          branch: ${{ github.event.release.target_commitish }}
-          commit_message: Update CHANGELOG
-          file_pattern: CHANGELOG.md
