@@ -16,7 +16,7 @@ class FortuneAdInserter
 {
     private $option_name = 'fortune_ad_code';
     
-    private $api_url = 'http://adams-manager/wp-plugins/fortune-ad-inserter.json'; // JSONデータを提供するAPIのURL
+    private $api_url = 'http://adams-manager/wp-plugins/fortune-ad-inserter.json';
     
     private $plugin_slug = 'fortune-ad-inserter';
     
@@ -75,18 +75,18 @@ class FortuneAdInserter
         }
         
         return (object)[
-            'name'           => 'Custom Fortune Ad Inserter',
-            'slug'           => $this->plugin_slug,
+            'name'           => $plugin_data['name'],
+            'slug'           => $plugin_data['slug'],
             'version'        => $plugin_data['new_version'],
-            'author'         => 'IINA Inc.',
-            'author_profile' => 'https://ii-na.jp/',
+            'author'         => $plugin_data['author'],
+            'author_profile' => $plugin_data['author_profile'],
             'requires'       => $plugin_data['requires'],
             'tested'         => $plugin_data['tested'],
             'last_updated'   => $plugin_data['last_updated'],
             'download_link'  => $plugin_data['download_url'],
             'sections'       => [
-                'description' => 'フォーチュンアドの広告を簡単に設置するWordPressプラグインです。',
-                'changelog'   => 'Changelog will be provided here.',
+                'description' => $plugin_data['description'],
+                'changelog'   => $plugin_data['changelog'],
             ],
         ];
     }
@@ -102,7 +102,7 @@ class FortuneAdInserter
             [ $this, 'settings_page_html' ]
         );
     }
-    
+
     // 設定項目の登録
     public function register_settings()
     {
