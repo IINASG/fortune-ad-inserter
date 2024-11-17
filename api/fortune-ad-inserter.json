@@ -1,13 +1,1 @@
-{
-  "name" : "フォーチュンアド",
-  "description" : "フォーチュンアドの広告を簡単に設置するWordPressプラグイン",
-  "changelog" : "更新履歴",
-  "author" : "Fortune Ad",
-  "author_profile" : "https://manager.afiina.jp/admin",
-  "new_version" : "1.0.3",
-  "download_url" : "https://your-domain.com/path-to-latest-plugin.zip",
-  "slug" : "fortune-ad-inserter",
-  "requires" : "5.0",
-  "tested" : "6.7",
-  "last_updated" : "2024-11-05"
-}
+{"name":"フォーチュンアド","description":"フォーチュンアドの広告を簡単に設置するWordPressプラグイン","changelog":"Update History","author":"Fortune Ad","author_profile":"https://manager.afiina.jp/admin","new_version":"1.0.0","download_url":"https://your-domain.com/path-to-latest-plugin.zip","slug":"fortune-ad-inserter","requires":"5.0","tested":"6.7","last_updated":"2024-11-18"}

@@ -6,6 +6,9 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 20.x ]
 
     permissions:
       contents: write
@@ -24,6 +27,24 @@ jobs:
           github_token: ${{ secrets.ACCESSTOKEN }}
           tag_prefix: ""
           dry_run: true
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: |
+          npm ci
+          npm run production
+          git config user.name $GIT_NAME
+          git config user.email $GIT_EMAIL
+          git add -A .
+          git commit -m "Create release file"
+        env:
+          NEW_VERSION: ${{ steps.tag_version.outputs.new_tag }}
+          CHANGELOG: ${{ steps.tag_version.outputs.changelog }}
+          GITHUB_TOKEN: ${{ secrets.ACCESSTOKEN }}
+          GIT_EMAIL: github-actions[bot]@users.noreply.github.com
+          GIT_NAME: github-actions[bot]
+
       - name: Update Changelog
         uses: stefanzweifel/changelog-updater-action@v1
         with:
