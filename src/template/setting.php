@@ -10,6 +10,7 @@
                 <td>
                     <label>
                         <input type="text" name="<?php echo $this->option_name; ?>[ad_code]" value="<?php echo isset( $options['ad_code'] ) ? esc_attr( $options['ad_code'] ) : ''; ?>"/>
+                        <a href="https://manager.afiina.jp/admin/network/spaces" target="_blank" style="margin-left: 1rem;">広告コード取得</a>
                     </label>
                 </td>
             </tr>
