@@ -24,7 +24,7 @@ jobs:
           token: ${{ secrets.ACCESSTOKEN }}
 
       - name: Bump version and push tag
-        id: tag_version
+        id: dry_tag_version
         uses: mathieudutour/github-tag-action@v6.2
         with:
           github_token: ${{ secrets.ACCESSTOKEN }}
@@ -34,8 +34,8 @@ jobs:
       - name: Update Changelog
         uses: stefanzweifel/changelog-updater-action@v1
         with:
-          latest-version: ${{ steps.tag_version.outputs.new_tag }}
-          release-notes: ${{ steps.tag_version.outputs.changelog }}
+          latest-version: ${{ steps.dry_tag_version.outputs.new_tag }}
+          release-notes: ${{ steps.dry_tag_version.outputs.changelog }}
           compare-url-target-revision: ${{ steps.changelog-updater.outputs.release_compare_url }}
 
       - name: Commit updated CHANGELOG
@@ -58,8 +58,8 @@ jobs:
           git commit -m "Create release file"
           git push
         env:
-          NEW_VERSION: ${{ steps.tag_version.outputs.new_tag }}
-          CHANGELOG: ${{ steps.tag_version.outputs.changelog }}
+          NEW_VERSION: ${{ steps.dry_tag_version.outputs.new_tag }}
+          CHANGELOG: ${{ steps.dry_tag_version.outputs.changelog }}
           GITHUB_TOKEN: ${{ secrets.ACCESSTOKEN }}
           GIT_EMAIL: github-actions[bot]@users.noreply.github.com
           GIT_NAME: github-actions[bot]
