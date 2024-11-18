@@ -16,7 +16,7 @@ class FortuneAdInserter
 {
     private $option_name = 'fortune_ad_code';
     
-    private $api_url = 'http://adams-manager/wp-plugins/fortune-ad-inserter.json';
+    private $api_url = 'https://manager.afiina.jp/wp-plugins/fortune-ad-inserter.json';
     
     private $plugin_slug = 'fortune-ad-inserter';
     
