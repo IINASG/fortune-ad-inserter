@@ -3,7 +3,7 @@
 /**
  * Plugin Name: フォーチュンアド
  * Description: フォーチュンアドの広告を簡単に設置するWordPressプラグイン
- * Version: 0.0.7
+ * Version: 0.0.8
  * Author: Fortune Ad
  * Author URI: https://manager.afiina.jp/admin
  */
