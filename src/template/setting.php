@@ -6,6 +6,11 @@
 
         <table class="form-table">
             <tr>
+                <th scope="row" colspan="2">
+                    ショートコード : <code>[<?php echo $this->tag_name; ?>]</code>
+                </th>
+            </tr>
+            <tr>
                 <th scope="row">広告コード</th>
                 <td>
                     <label>

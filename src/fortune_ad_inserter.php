@@ -14,6 +14,8 @@ if ( !defined( 'ABSPATH' ) ) {
 
 class FortuneAdInserter
 {
+    private $tag_name = 'fortune_ad';
+    
     private $option_name = 'fortune_ad_code';
     
     private $api_url = 'https://manager.afiina.jp/wp-plugins/fortune-ad-inserter.json';
@@ -30,7 +32,7 @@ class FortuneAdInserter
         add_action( 'admin_menu', [ $this, 'create_settings_page' ] );
         add_action( 'admin_init', [ $this, 'register_settings' ] );
         add_action( 'wp_head', [ $this, 'insert_ad_script' ] );
-        add_shortcode( 'fortune_ad', [ $this, 'display_ad_content' ] );
+        add_shortcode( $this->tag_name, [ $this, 'display_ad_content' ] );
     }
     
     // 更新を確認
@@ -102,7 +104,7 @@ class FortuneAdInserter
             [ $this, 'settings_page_html' ]
         );
     }
-
+    
     // 設定項目の登録
     public function register_settings()
     {
