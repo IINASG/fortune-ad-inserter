@@ -71,7 +71,7 @@ jobs:
           aws-region: ap-northeast-1
       - name: Put S3 with the AWS CLI
         run: |
-          aws cp ./api/fortune-ad-inserter.json s3://afiina-public/wp-plugins/fortune-ad-inserter.json
+          aws s3 cp ./api/fortune-ad-inserter.json s3://afiina-public/wp-plugins/fortune-ad-inserter.json
 
   call-workflow:
     needs: update
