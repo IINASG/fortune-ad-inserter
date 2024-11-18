@@ -2,6 +2,14 @@
 
 All notable changes to `fortune-ad-inserter` will be documented in this file.
 
+## 0.0.6 - 2024-11-18
+
+### [0.0.6](https://github.com/IINASG/fortune-ad-inserter/compare/0.0.5...0.0.6) (2024-11-18)
+
+### Bug Fixes
+
+* リリース周りの処理修正 ([baaefa7](https://github.com/IINASG/fortune-ad-inserter/commit/baaefa7b4566293f77ae75fd7096bbb4216b320b))
+
 ## 0.0.5 - 2024-11-18
 
 ### [0.0.5](https://github.com/IINASG/fortune-ad-inserter/compare/0.0.4...0.0.5) (2024-11-18)
