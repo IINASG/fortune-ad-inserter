@@ -28,8 +28,11 @@ jobs:
           token: ${{ secrets.ACCESSTOKEN }}
           tag: ${{ steps.tag_version.outputs.new_tag }}
           name: Release ${{ steps.tag_version.outputs.new_tag }}
-          body: ${{ steps.tag_version.outputs.changelog }}
-      - name: "echo html_url"
-        run: echo "${{ steps.release.outputs.html_url }}"
-      - name: "echo upload_url"
-        run: echo "${{ steps.release.outputs.upload_url }}"
+      - name: Upload assets file
+        shell: bash
+        run: gh release upload $TAG fortune-ad-inserter.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESSTOKEN }}
+          GIT_EMAIL: github-actions[bot]@users.noreply.github.com
+          GIT_NAME: github-actions[bot]
+          TAG: ${{ steps.tag_version.outputs.new_tag }}

@@ -63,32 +63,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACCESSTOKEN }}
           GIT_EMAIL: github-actions[bot]@users.noreply.github.com
           GIT_NAME: github-actions[bot]
-  bump-version:
+  call-workflow:
     needs: update
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.release.target_commitish }}
-      - name: Bump version and push tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v6.2
-        with:
-          github_token: ${{ secrets.ACCESSTOKEN }}
-          tag_prefix: ""
-      - name: Create a GitHub release
-        id: release
-        uses: ncipollo/release-action@v1
-        with:
-          token: ${{ secrets.ACCESSTOKEN }}
-          tag: ${{ steps.tag_version.outputs.new_tag }}
-          name: Release ${{ steps.tag_version.outputs.new_tag }}
-      - name: Upload assets file
+      - name: Call Workflow
         shell: bash
-        run: gh release upload $TAG fortune-ad-inserter.zip
+        run: gh workflow run bump-version.yml --ref main
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESSTOKEN }}
           GIT_EMAIL: github-actions[bot]@users.noreply.github.com
           GIT_NAME: github-actions[bot]
-          TAG: ${{ steps.tag_version.outputs.new_tag }}
