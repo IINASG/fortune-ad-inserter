@@ -1,10 +1,7 @@
 name: Bump version
 
 on:
-  pull_request:
-    branches:
-      - main
-    types: [ closed ]
+  workflow_dispatch:
 
 jobs:
   bump-version:
@@ -25,9 +22,14 @@ jobs:
           github_token: ${{ secrets.ACCESSTOKEN }}
           tag_prefix: ""
       - name: Create a GitHub release
+        id: release
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.ACCESSTOKEN }}
           tag: ${{ steps.tag_version.outputs.new_tag }}
           name: Release ${{ steps.tag_version.outputs.new_tag }}
           body: ${{ steps.tag_version.outputs.changelog }}
+      - name: "echo html_url"
+        run: echo "${{ steps.release.outputs.html_url }}"
+      - name: "echo upload_url"
+        run: echo "${{ steps.release.outputs.upload_url }}"
