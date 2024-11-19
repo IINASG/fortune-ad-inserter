@@ -1,0 +1,5 @@
+#section-changelog {
+    .plugin-changelog h1, h2, h3, h4, p, ul {
+        margin: 5px;
+    }
+}
