@@ -29,10 +29,24 @@ class FortuneAdInserter
         $this->plugin_file = plugin_basename( __FILE__ );
         add_filter( 'site_transient_update_plugins', [ $this, 'check_for_update' ] );
         add_filter( 'plugins_api', [ $this, 'provide_plugin_details' ], 10, 3 );
+        add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_styles' ] );
         add_action( 'admin_menu', [ $this, 'create_settings_page' ] );
         add_action( 'admin_init', [ $this, 'register_settings' ] );
         add_action( 'wp_head', [ $this, 'insert_ad_script' ] );
         add_shortcode( $this->tag_name, [ $this, 'display_ad_content' ] );
+    }
+    
+    public function enqueue_admin_styles( $hook_suffix )
+    {
+        // プラグイン詳細ページだけにCSSを適用
+        if ( $hook_suffix === 'plugin-install.php' || $hook_suffix === 'update.php' ) {
+            wp_enqueue_style(
+                'fortune-ad-admin-styles',
+                plugin_dir_url( __FILE__ ) . 'assets/css/plugin-admin.css',
+                [],
+                '1.0.0'
+            );
+        }
     }
     
     // 更新を確認
@@ -88,7 +102,7 @@ class FortuneAdInserter
             'download_link'  => $plugin_data['download_url'],
             'sections'       => [
                 'description' => $plugin_data['description'],
-                'changelog'   => $plugin_data['changelog'],
+                'changelog'   => '<div class="plugin-changelog">' . $plugin_data['changelog'] . '</div>',
             ],
         ];
     }
